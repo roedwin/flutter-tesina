@@ -18,10 +18,10 @@ class MainApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return MaterialApp.router(
-      title: 'TSE',
-      routerConfig: appRouter,
-      debugShowCheckedModeBanner: false,
-      theme: Apptheme().getTheme(),
-    );
+        title: 'TSE',
+        routerConfig: appRouter,
+        debugShowCheckedModeBanner: false,
+        theme: Apptheme().getTheme(),
+      );
   }
 }

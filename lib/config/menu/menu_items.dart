@@ -33,5 +33,11 @@ const appMenuItems = <MenuItem>[
     link: '/info', 
     icon: Icons.smart_button_outlined
   ),
+  MenuItem(
+    title: 'Graficos', 
+    subTitle: 'Varios bonotes en flutter', 
+    link: '/graficos', 
+    icon: Icons.smart_button_outlined
+  ),
   
 ];

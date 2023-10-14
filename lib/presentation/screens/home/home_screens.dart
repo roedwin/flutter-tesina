@@ -13,14 +13,26 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return  Scaffold(
-      body: Center(
-        child: FilledButton(
-          onPressed: () {
-            final menuItem = appMenuItems[1];
-            context.push(menuItem.link);
-          }, 
-          child: const Text("Verificar centro de votacion")
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          FilledButton(
+            onPressed: () {
+              final menuItem = appMenuItems[1];
+              context.push(menuItem.link);
+            }, 
+            child: const Text("Verificar centro de votacion")
+          ),
+          FilledButton(
+            onPressed: () {
+              final menuItem = appMenuItems[3];
+              context.push(menuItem.link);
+            }, 
+            child: const Text("Graficos")
+          ),
+        ]
+        
       ),
     );
   }
