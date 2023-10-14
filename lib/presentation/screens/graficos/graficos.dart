@@ -193,18 +193,15 @@ class HomePageState extends ConsumerState<Graficos> {
       dataMap.putIfAbsent(band.name, () => band.votes.toDouble());
     });
 
-    if(dataMap.isEmpty) return const CircularProgressIndicator();
+    //if(dataMap.isEmpty) return const CircularProgressIndicator();
 
-    return Container(
+    return dataMap.isEmpty ? const CircularProgressIndicator() : Container(
       padding: const EdgeInsets.only(top: 10),
       width: double.infinity,
       height: 250,
       child: PieChart(dataMap: dataMap)
-    );
+    );   
     
-    
-  }
-
-  
+  } 
   
 }

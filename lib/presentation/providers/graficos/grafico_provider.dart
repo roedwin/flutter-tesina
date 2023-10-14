@@ -15,7 +15,8 @@ final socketStatusProvider = StateNotifierProvider<serverStatus,ServerStatus>((r
 });
 
 class serverStatus extends StateNotifier<ServerStatus> {
-  final IO.Socket _socket = IO.io('http://10.0.2.2:3000', {
+  //final IO.Socket _socket = IO.io('http://10.0.2.2:3000', {
+  final IO.Socket _socket = IO.io('https://backend-graph.onrender.com', {
     'transports': ['websocket'],
     'autoConnect': true,
   });
@@ -38,7 +39,7 @@ class serverStatus extends StateNotifier<ServerStatus> {
 
 class SocketService extends StateNotifier<dynamic>{
   ServerStatus _serverStatus = ServerStatus.connecting;
-  final IO.Socket _socket = IO.io('http://10.0.2.2:3000', {
+  final IO.Socket _socket = IO.io('https://backend-graph.onrender.com/', {
     'transports': ['websocket'],
     'autoConnect': true,
   });
