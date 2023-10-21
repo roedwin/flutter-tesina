@@ -17,27 +17,27 @@ class MenuItem {
 const appMenuItems = <MenuItem>[
   MenuItem(
     title: 'Home screen', 
-    subTitle: 'Introduccion a riverpod', 
+    subTitle: 'Home', 
     link: '/', 
-    icon: Icons.countertops_outlined
+    icon: Icons.home
   ),
   MenuItem(
     title: 'Verificar Dui', 
-    subTitle: 'Introduccion a riverpod', 
+    subTitle: 'Introducir dui para obtener datos', 
     link: '/dui', 
-    icon: Icons.countertops_outlined
+    icon: Icons.credit_card
   ),
   MenuItem(
     title: 'Informacion', 
-    subTitle: 'Varios bonotes en flutter', 
+    subTitle: 'Muestra la informacion del votante', 
     link: '/info', 
-    icon: Icons.smart_button_outlined
+    icon: Icons.info
   ),
   MenuItem(
     title: 'Graficos', 
-    subTitle: 'Varios bonotes en flutter', 
+    subTitle: 'Varios tipos de graficos', 
     link: '/graficos', 
-    icon: Icons.smart_button_outlined
+    icon: Icons.auto_graph_outlined
   ),
   
 ];
