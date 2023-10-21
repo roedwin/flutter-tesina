@@ -7,7 +7,7 @@ import 'package:proyecto_tesina/infraestructure/models/dui_response.dart';
 
 class DuidbDatasource extends DuiDatasource{
   final dio = Dio(BaseOptions(
-    baseUrl: 'http://10.0.2.2:8000/posts/dui/',
+    baseUrl: 'http://54.218.81.88/api/v1/destino-sufragio/dui/',
   ));
 
   Dui? datosDui;
@@ -18,15 +18,15 @@ class DuidbDatasource extends DuiDatasource{
     final response = await dio.get(dui);
     final duiDBResponse = DuiDbResponse.fromJson(response.data);
     datosDui = Dui(
-      id: duiDBResponse.id, 
-      dui: duiDBResponse.dui, 
-      nombre: duiDBResponse.nombre, 
-      departamento: duiDBResponse.departamento, 
-      municipio: duiDBResponse.municipio,
-      centrodevotacion: duiDBResponse.centroDeVotacion, 
-      direccion: duiDBResponse.direccion, 
-      jrv: duiDBResponse.jrv, 
-      correlativo: duiDBResponse.correlativo
+      id: duiDBResponse.idPersonaNatural.toString(), 
+      dui: duiDBResponse.informacionPersonal.dui, 
+      nombre: duiDBResponse.informacionPersonal.nombres + duiDBResponse.informacionPersonal.apellidos, 
+      departamento: duiDBResponse.informacionPersonal.municipio.departamentos.nombre, 
+      municipio: duiDBResponse.informacionPersonal.municipio.nombre,
+      centrodevotacion: duiDBResponse.jrv.centroVotacion.nombre, 
+      direccion: duiDBResponse.jrv.centroVotacion.direccion, 
+      jrv: duiDBResponse.jrv.idCentroVotacion.toString(), 
+      correlativo: duiDBResponse.jrv.codigo
     );
 
     print(datosDui?.nombre);
