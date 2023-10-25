@@ -19,14 +19,19 @@ final appRouter = GoRouter(
       builder: (context, state) => const DuiScreen(),
     ),
     GoRoute(
-      path: '/info',
-      name: DuiInfoScreen.name,
-      builder: (context, state) => const DuiInfoScreen(),
-    ),
-    GoRoute(
       path: '/graficos',
       name: Graficos.name,
       builder: (context, state) => Graficos(),
+    ),
+    GoRoute(
+      path: '/tutorial',
+      name: Tutorial.name,
+      builder: (context, state) => const Tutorial(),
+    ),
+    GoRoute(
+      path: '/info',
+      name: DuiInfoScreen.name,
+      builder: (context, state) => const DuiInfoScreen(),
     ),
   ]
 );

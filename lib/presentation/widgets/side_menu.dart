@@ -41,7 +41,7 @@ class _SideMenuState extends State<SideMenu> {
           child: const Text('Principal'),
         ),
         ...appMenuItems
-          .sublist(0,2)
+          .sublist(0,3)
           .map((item) => NavigationDrawerDestination(
             icon: Icon(item.icon), 
             label: Text(item.title)
@@ -56,7 +56,7 @@ class _SideMenuState extends State<SideMenu> {
           child:  Text('Mas Opciones'),
         ),
         ...appMenuItems
-          .sublist(3)
+          .sublist(3,4)
           .map((item) => NavigationDrawerDestination(
             icon: Icon(item.icon), 
             label: Text(item.title)

@@ -28,16 +28,22 @@ const appMenuItems = <MenuItem>[
     icon: Icons.credit_card
   ),
   MenuItem(
-    title: 'Informacion', 
-    subTitle: 'Muestra la informacion del votante', 
-    link: '/info', 
-    icon: Icons.info
-  ),
-  MenuItem(
     title: 'Graficos', 
     subTitle: 'Varios tipos de graficos', 
     link: '/graficos', 
     icon: Icons.auto_graph_outlined
+  ),
+  MenuItem(
+    title: 'Tutorial', 
+    subTitle: 'Como ejercer el voto', 
+    link: '/tutorial', 
+    icon: Icons.accessible_rounded
+  ),
+  MenuItem(
+    title: 'Informacion', 
+    subTitle: 'Muestra la informacion del votante', 
+    link: '/info', 
+    icon: Icons.info
   ),
   
 ];

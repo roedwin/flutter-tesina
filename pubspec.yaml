@@ -23,5 +23,5 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/images/Tse_logo.png
+    - assets/images/
   uses-material-design: true
