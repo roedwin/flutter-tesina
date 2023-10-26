@@ -2,9 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:proyecto_tesina/infraestructure/models/partidos.dart';
 import 'package:proyecto_tesina/presentation/providers/graficos/grafico_provider.dart';
+import 'package:proyecto_tesina/presentation/widgets/side_menu.dart';
 
 
 class Graficos extends ConsumerStatefulWidget {
@@ -24,55 +26,41 @@ class HomePageState extends ConsumerState<Graficos> {
   void initState() {
     final socketService = ref.read(socketServiceProvider.notifier);
 
+    //socketService.socket.on('active-bands', _handleActiveBands);
     socketService.socket.on('active-bands', _handleActiveBands);
 
+    // if (bands.isNotEmpty) {
+    //   ref.read(datosProvider.notifier).update((state) => state = bands);      
+    // }
     super.initState();    
   }
 
   _handleActiveBands(dynamic payload) {
     bands = (payload as List).map((band) => Partido.fromMap(band)).toList();
-
+    ref.read(datosProvider.notifier).update((state) => state = bands); 
     setState(() {});
   }
 
-  @override
-  void dispose() {
-    final socketService = ref.read(socketServiceProvider.notifier).socket;
-    socketService.off('active-bands');
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   final socketService = ref.read(socketServiceProvider.notifier);
+  //   socketService.socket.off('active-bands');
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     //final socketService = Provider.of<SocketService>(context);
     //final bands = ref.watch(socketServiceProvider);
     //final serverStatus = ref.read(socketServiceProvider.notifier).serverStatus;
-    final serverStatus = ref.watch(socketStatusProvider);
+    //final serverStatus = ref.watch(socketStatusProvider);
 
+    final bands = ref.watch(datosProvider);
    
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
-        elevation: 1,
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 10),
-            child:
-                serverStatus.toString() == "ServerStatus.online"
-                    ? Icon(
-                        Icons.check_circle,
-                        color: Colors.blue[300],
-                      )
-                    : const Icon(
-                        Icons.offline_bolt,
-                        color: Colors.red,
-                      ),
-          )
-        ],
-        title: const Text(
-          'BandNames',
-          style: TextStyle(color: Colors.black87),
-        ),
-        backgroundColor: Colors.white,
       ),
       body: Column(
         children: [
@@ -85,11 +73,12 @@ class HomePageState extends ConsumerState<Graficos> {
           )
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   elevation: 1,
-      //   onPressed: addNewBand,
-      //   child: const Icon(Icons.add),
-      // ),
+      drawer: SideMenu(scaffoldKey: scaffoldKey),
+      floatingActionButton: FloatingActionButton(
+        elevation: 1,
+        onPressed: () => context.go('/'),
+        child: const Icon(Icons.arrow_back),
+      ),
     );
   }
 
@@ -188,13 +177,17 @@ class HomePageState extends ConsumerState<Graficos> {
   Widget _showGraph() {
     Map<String, double> dataMap = {};
 
-    bands.forEach((band) {
+    final datos = ref.watch(datosProvider);
+
+    if(datos.isEmpty) return const CircularProgressIndicator();
+    
+
+    datos.forEach((band) {
       dataMap.putIfAbsent(band.name, () => band.votes.toDouble());
     });
 
-    //if(dataMap.isEmpty) return const CircularProgressIndicator();
 
-    return dataMap.isEmpty ? const CircularProgressIndicator() : Container(
+    return Container(
       padding: const EdgeInsets.only(top: 10),
       width: double.infinity,
       height: 250,

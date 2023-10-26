@@ -10,7 +10,6 @@ import '../../../config/menu/menu_items.dart';
 class HomeScreen extends ConsumerStatefulWidget {
   static const name = 'home-screen';
 
-
   const HomeScreen({super.key});
 
   @override
@@ -31,6 +30,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
+        
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         const Align(
@@ -45,16 +45,36 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 40,),
+        const SizedBox(
+          height: 40,
+        ),
         const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomButton(screen: 1, text: "Verificar DUI", icon: Icon(Icons.co_present_outlined, color: Color(0xff2862f5) , size: 50,),),
+            CustomButton(
+              screen: 1,
+              text: "Verificar DUI",
+              icon: Icon(
+                Icons.co_present_outlined,
+                color: Color(0xff2862f5),
+                size: 50,
+              ),
+            ),
             SizedBox(width: 16),
-            CustomButton(screen: 3, text: "Estadisticas", icon: Icon(Icons.pie_chart, color: Color(0xff2862f5) , size: 50,),),
+            CustomButton(
+              screen: 2,
+              text: "Estadisticas",
+              icon: Icon(
+                Icons.pie_chart,
+                color: Color(0xff2862f5),
+                size: 50,
+              ),
+            ),
           ],
         ),
-        const SizedBox(height: 80,),
+        const SizedBox(
+          height: 80,
+        ),
         _showGraph()
       ]),
       drawer: SideMenu(scaffoldKey: scaffoldKey),
@@ -71,26 +91,22 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
     //if(dataMap.isEmpty) return const CircularProgressIndicator();
 
     return Container(
-      padding: const EdgeInsets.only(top: 10),
-      width: double.infinity,
-      height: 250,
-      child: PieChart(dataMap: dataMap)
-    );   
-    
-  } 
+        padding: const EdgeInsets.only(top: 10),
+        width: double.infinity,
+        height: 250,
+        child: PieChart(dataMap: dataMap));
+  }
 }
-
 
 class CustomButton extends StatelessWidget {
   final int screen;
   final String text;
   final Icon icon;
-  const CustomButton({
-    super.key,
-    required this.screen,
-    required this.text,
-    required this.icon
-  });
+  const CustomButton(
+      {super.key,
+      required this.screen,
+      required this.text,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -99,19 +115,24 @@ class CustomButton extends StatelessWidget {
       child: Material(
         color: Color.fromARGB(255, 221, 222, 224),
         child: InkWell(
-          onTap: (){
+          onTap: () {
             final menuItem = appMenuItems[screen];
             context.push(menuItem.link);
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            child: Column(
-              children: [
-                Text(text, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
-                icon
-              ],
-            )
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              child: Column(
+                children: [
+                  Text(
+                    text,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  icon
+                ],
+              )),
         ),
       ),
     );

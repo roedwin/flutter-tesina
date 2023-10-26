@@ -14,10 +14,12 @@ class SlideInfo {
 }
 
 final slides = <SlideInfo>[
-  SlideInfo('Verificacion de identidad', 'Eu nostrud culpa dolore amet consequat pariatur eiusmod labore sit aliqua.', 'assets/images/3.png'),
-  SlideInfo('Busqueda en el patron', 'Fugiat aliquip cillum ad enim sint proident est in eiusmod aliquip ad officia.', 'assets/images/4.png'),
-  SlideInfo('Votacion digital', 'Deserunt ullamco quis pariatur laboris adipisicing cupidatat proident dolore mollit qui.', 'assets/images/5.png'),
-  SlideInfo('Firma del patron electoral', 'Laborum sint laborum irure consequat ipsum magna laboris qui exercitation adipisicing.', 'assets/images/6.png'),
+  SlideInfo('Pasos', 'Eu nostrud culpa dolore amet consequat pariatur eiusmod labore sit aliqua.', 'assets/images/3.png'),
+  SlideInfo('Verificacion de identidad', 'Fugiat aliquip cillum ad enim sint proident est in eiusmod aliquip ad officia.', 'assets/images/4.png'),
+  SlideInfo('Busqueda de patron electoral', 'Deserunt ullamco quis pariatur laboris adipisicing cupidatat proident dolore mollit qui.', 'assets/images/5.png'),
+  SlideInfo('Votacion digital', 'Laborum sint laborum irure consequat ipsum magna laboris qui exercitation adipisicing.', 'assets/images/6.png'),
+  SlideInfo('Firma del patron electoral', 'Voluptate officia ut duis adipisicing tempor consectetur cupidatat dolor elit dolor.', 'assets/images/7.png'),
+  SlideInfo('', '', 'assets/images/8.png'),
 ];
 
 

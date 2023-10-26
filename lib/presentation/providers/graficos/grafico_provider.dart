@@ -74,4 +74,6 @@ class SocketService extends StateNotifier<dynamic>{
 }
 
 
-
+final datosProvider = StateProvider<List<Partido>>((ref) {
+  return [];
+});
