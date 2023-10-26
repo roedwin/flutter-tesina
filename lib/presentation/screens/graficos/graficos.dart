@@ -22,24 +22,21 @@ class HomePageState extends ConsumerState<Graficos> {
     // Band(id: '1', name: 'System of down', votes: 3),
     // Band(id: '1', name: 'Blink 182', votes: 6),
   ];
-  @override
-  void initState() {
-    final socketService = ref.read(socketServiceProvider.notifier);
+  // @override
+  // void initState() {
+  //   final socketService = ref.read(socketServiceProvider.notifier);
 
-    //socketService.socket.on('active-bands', _handleActiveBands);
-    socketService.socket.on('active-bands', _handleActiveBands);
+  //   socketService.socket.on('active-bands', _handleActiveBands);
 
-    // if (bands.isNotEmpty) {
-    //   ref.read(datosProvider.notifier).update((state) => state = bands);      
-    // }
-    super.initState();    
-  }
 
-  _handleActiveBands(dynamic payload) {
-    bands = (payload as List).map((band) => Partido.fromMap(band)).toList();
-    ref.read(datosProvider.notifier).update((state) => state = bands); 
-    setState(() {});
-  }
+  //   super.initState();    
+  // }
+
+  // _handleActiveBands(dynamic payload) {
+  //   bands = (payload as List).map((band) => Partido.fromMap(band)).toList();
+  //   ref.read(datosProvider.notifier);
+  //   setState(() {});
+  // }
 
   // @override
   // void dispose() {
@@ -55,7 +52,7 @@ class HomePageState extends ConsumerState<Graficos> {
     //final serverStatus = ref.read(socketServiceProvider.notifier).serverStatus;
     //final serverStatus = ref.watch(socketStatusProvider);
 
-    final bands = ref.watch(datosProvider);
+    bands = ref.watch(datosProvider);
    
     final scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(

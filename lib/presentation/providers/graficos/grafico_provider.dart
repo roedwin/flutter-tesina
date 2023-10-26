@@ -47,33 +47,30 @@ class SocketService extends StateNotifier<dynamic>{
   ServerStatus get serverStatus => _serverStatus;
   IO.Socket get socket => _socket;
 
-  List<Partido> bands = [
-    // Band(id: '1', name: 'Metalica', votes: 1),
-    // Band(id: '1', name: 'Queen', votes: 5),
-    // Band(id: '1', name: 'System of down', votes: 3),
-    // Band(id: '1', name: 'Blink 182', votes: 6),
-  ];
-
+  
   SocketService() : super([]);
    
-
-  void _initConfig() {
-    _socket.on('connect', (_) {
-      print('connect');
-      _serverStatus = ServerStatus.online;
-      // Notify listeners using Riverpod's StateNotifier
-      ChangeNotifier();
-    });
-    _socket.on('disconnect', (_) {
-      print('disconnect');
-      _serverStatus = ServerStatus.offline;
-      // Notify listeners using Riverpod's StateNotifier
-      ChangeNotifier();
-    });
-  }
 }
 
 
-final datosProvider = StateProvider<List<Partido>>((ref) {
-  return [];
+final datosProvider = StateNotifierProvider<DatosNotifier,List<Partido>>((ref) {
+  return DatosNotifier();
 });
+
+
+class DatosNotifier extends StateNotifier<List<Partido>> {
+  final IO.Socket _socket = IO.io('https://backend-graph.onrender.com/', {
+    'transports': ['websocket'],
+    'autoConnect': true,
+  });
+  List<Partido> bands = [];
+  DatosNotifier(): super([]){llenarDatos();}
+
+  void llenarDatos(){
+    _socket.on('active-bands', (data) {
+      bands = (data as List).map((band) => Partido.fromMap(band)).toList();
+      state = bands;
+    });
+  }
+
+}
