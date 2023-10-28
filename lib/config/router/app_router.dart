@@ -6,7 +6,7 @@ import 'package:proyecto_tesina/presentation/screens/screens.dart';
 
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/tutorial',
   routes: [
     GoRoute(
       path: '/',

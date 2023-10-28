@@ -59,7 +59,8 @@ final datosProvider = StateNotifierProvider<DatosNotifier,List<Partido>>((ref) {
 
 
 class DatosNotifier extends StateNotifier<List<Partido>> {
-  final IO.Socket _socket = IO.io('https://backend-graph.onrender.com/', {
+  // final IO.Socket _socket = IO.io('https://backend-graph.onrender.com/', {
+  final IO.Socket _socket = IO.io('http://54.218.81.88:3002', {
     'transports': ['websocket'],
     'autoConnect': true,
   });
@@ -67,7 +68,9 @@ class DatosNotifier extends StateNotifier<List<Partido>> {
   DatosNotifier(): super([]){llenarDatos();}
 
   void llenarDatos(){
-    _socket.on('active-bands', (data) {
+    // _socket.on('active-bands', (data) {
+    _socket.on('getSufragios', (data) {
+      print(data);
       bands = (data as List).map((band) => Partido.fromMap(band)).toList();
       state = bands;
     });

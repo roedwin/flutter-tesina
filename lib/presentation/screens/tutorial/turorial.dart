@@ -14,11 +14,11 @@ class SlideInfo {
 }
 
 final slides = <SlideInfo>[
-  SlideInfo('Pasos', 'Eu nostrud culpa dolore amet consequat pariatur eiusmod labore sit aliqua.', 'assets/images/3.png'),
-  SlideInfo('Verificacion de identidad', 'Fugiat aliquip cillum ad enim sint proident est in eiusmod aliquip ad officia.', 'assets/images/4.png'),
-  SlideInfo('Busqueda de patron electoral', 'Deserunt ullamco quis pariatur laboris adipisicing cupidatat proident dolore mollit qui.', 'assets/images/5.png'),
-  SlideInfo('Votacion digital', 'Laborum sint laborum irure consequat ipsum magna laboris qui exercitation adipisicing.', 'assets/images/6.png'),
-  SlideInfo('Firma del patron electoral', 'Voluptate officia ut duis adipisicing tempor consectetur cupidatat dolor elit dolor.', 'assets/images/7.png'),
+  SlideInfo('Pasos a Seguir', '', 'assets/images/3.png'),
+  SlideInfo('Verificación de identidad', '- Entrega tu DUI\n- Verificación de registro y validación para votar\n- Confirmación valida\n- Genera el codigo QR', 'assets/images/4.png'),
+  SlideInfo('Reafirmación de identidad y busqueda en el padrón electoral', '- Reafirmación de tu identidad\n- Busqueda de tu nombre en el padrón electoral\n- Confirmación valida', 'assets/images/5.png'),
+  SlideInfo('Votación digital', '- Dirigete a la terminal de votación\n- Selecciona el candidato de preferencia\n- Tu voto sera registrado y enviado de forma electrónica', 'assets/images/6.png'),
+  SlideInfo('Verificación final y firma del padr+on electoral', '- Regresa a la segunda estación de validación\n- Firma el padrón electoral en físico\n- Verifica que te sellen tu ticket QR\n- Marca tu dedo meñique\n- No olvides pedir tu DUI', 'assets/images/7.png'),
   SlideInfo('', '', 'assets/images/8.png'),
 ];
 
@@ -77,7 +77,7 @@ class _TutorialState extends State<Tutorial> {
             top: 40,
             child: TextButton(
               child: const Text('Salir'),
-              onPressed: () => context.pop(),
+              onPressed: () => context.pushReplacement('/'),
             ),
           ),
           endReached ? Positioned(
@@ -87,7 +87,7 @@ class _TutorialState extends State<Tutorial> {
               from: 15,
               delay: const Duration(seconds: 1),
               child: FilledButton(
-                onPressed: () => context.pop(),
+                onPressed: () => context.pushReplacement('/'),
                 child: const Text('Comenzar'),
               ),
             ),
