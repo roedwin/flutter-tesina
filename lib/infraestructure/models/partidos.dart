@@ -1,6 +1,6 @@
 
 class Partido {
-  String id;
+  int id;
   String name;
   int votes;
 

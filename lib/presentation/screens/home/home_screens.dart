@@ -18,10 +18,10 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class HomeScreenState extends ConsumerState<HomeScreen> {
   List<Partido> bands = [
-    Partido(id: '1', name: 'FMLN', votes: 2),
-    Partido(id: '1', name: 'Nuevas Ideas', votes: 7),
-    Partido(id: '1', name: 'Arena', votes: 3),
-    Partido(id: '1', name: 'VAMOS', votes: 1),
+    Partido(id: 1, name: 'FMLN', votes: 2),
+    Partido(id: 2, name: 'Nuevas Ideas', votes: 7),
+    Partido(id: 3, name: 'Arena', votes: 3),
+    Partido(id: 4, name: 'VAMOS', votes: 1),
   ];
 
   @override

@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:proyecto_tesina/infraestructure/models/generos.dart';
 import 'package:proyecto_tesina/infraestructure/models/partidos.dart';
 import 'package:proyecto_tesina/presentation/providers/graficos/grafico_provider.dart';
+import 'package:proyecto_tesina/presentation/widgets/bar_graph.dart';
+import 'package:proyecto_tesina/presentation/widgets/bar_graph_m.dart';
 import 'package:proyecto_tesina/presentation/widgets/side_menu.dart';
 
 
@@ -22,28 +25,9 @@ class HomePageState extends ConsumerState<Graficos> {
     // Band(id: '1', name: 'System of down', votes: 3),
     // Band(id: '1', name: 'Blink 182', votes: 6),
   ];
-  // @override
-  // void initState() {
-  //   final socketService = ref.read(socketServiceProvider.notifier);
 
-  //   socketService.socket.on('active-bands', _handleActiveBands);
-
-
-  //   super.initState();    
-  // }
-
-  // _handleActiveBands(dynamic payload) {
-  //   bands = (payload as List).map((band) => Partido.fromMap(band)).toList();
-  //   ref.read(datosProvider.notifier);
-  //   setState(() {});
-  // }
-
-  // @override
-  // void dispose() {
-  //   final socketService = ref.read(socketServiceProvider.notifier);
-  //   socketService.socket.off('active-bands');
-  //   super.dispose();
-  // }
+  List<Masculino> bandsM = [];
+  List<Femenino> bandsF = [];
 
   @override
   Widget build(BuildContext context) {
@@ -53,22 +37,37 @@ class HomePageState extends ConsumerState<Graficos> {
     //final serverStatus = ref.watch(socketStatusProvider);
 
     bands = ref.watch(datosProvider);
+    bandsM = ref.watch(masculinosProvider);
+    bandsF = ref.watch(femeninasProvider);
    
     final scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
       ),
-      body: Column(
-        children: [
-          _showGraph(),
-          Expanded(
-            child: ListView.builder(
-              itemCount: bands.length,
-              itemBuilder: (context, i) => _bandTile(bands[i]),
-            ),
-          )
-        ],
+      body: SingleChildScrollView(
+        child:Column(
+          children: [
+            const Text('Votacion general'),
+            Center(child: _showGraph(bands)),
+      
+            const Text('Voto Masculino'),
+            // _showGraph(bandsM),
+            const BarChartSampleM(),
+            
+            const Text('Voto Femenino'),
+            // _showGraph(bandsF),
+            const BarChartSample()
+            
+            
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: bands.length,
+            //     itemBuilder: (context, i) => _bandTile(bands[i]),
+            //   ),
+            // )
+          ],
+        ),
       ),
       drawer: SideMenu(scaffoldKey: scaffoldKey),
       floatingActionButton: FloatingActionButton(
@@ -84,7 +83,7 @@ class HomePageState extends ConsumerState<Graficos> {
     //final bands = ref.watch(socketServiceProvider);
     //final serverStatus = ref.watch(socketStateNotifierProvider);
     return Dismissible(
-      key: Key(band.id),
+      key: Key(band.id.toString()),
       direction: DismissDirection.startToEnd,
       // onDismissed: (_) =>
       //     socketService.socket.emit('delete-band', {'id': band.id}),
@@ -115,66 +114,10 @@ class HomePageState extends ConsumerState<Graficos> {
     );
   }
 
-  // addNewBand() {
-  //   final textController = TextEditingController();
-  //   if (Platform.isAndroid) {
-  //     return showDialog(
-  //       context: context,
-  //       builder: (_) => AlertDialog(
-  //         title: const Text('New band name:'),
-  //         content: TextField(
-  //           controller: textController,
-  //         ),
-  //         actions: [
-  //           MaterialButton(
-  //             textColor: Colors.blue,
-  //             elevation: 5,
-  //             onPressed: () => addBandToList(textController.text),
-  //             child: const Text(
-  //               'Add',
-  //               style: TextStyle(fontSize: 20),
-  //             ),
-  //           )
-  //         ],
-  //       ),
-  //     );
-  //   }
-  //   showCupertinoDialog(
-  //     context: context,
-  //     builder: (_) => CupertinoAlertDialog(
-  //       title: const Text('New band name:'),
-  //       content: TextField(
-  //         controller: textController,
-  //       ),
-  //       actions: [
-  //         CupertinoDialogAction(
-  //           isDefaultAction: true,
-  //           child: const Text('Add'),
-  //           onPressed: () => addBandToList(textController.text),
-  //         ),
-  //         CupertinoDialogAction(
-  //           isDestructiveAction: true,
-  //           child: const Text('Dismiss'),
-  //           onPressed: () => Navigator.pop(context),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // void addBandToList(String name) {
-  //   if (name.length > 1) {
-  //     final socketService = Provider.of<SocketService>(context, listen: false);
-  //     socketService.socket.emit('add-band', {'name': name});
-  //   }
-
-  //   Navigator.pop(context);
-  // }
-  // int touchedIndex = 0;
-  Widget _showGraph() {
+  Widget _showGraph(List datos) {
     Map<String, double> dataMap = {};
 
-    final datos = ref.watch(datosProvider);
+    //final datos = ref.watch(datosProvider);
 
     if(datos.isEmpty) return const CircularProgressIndicator();
     
