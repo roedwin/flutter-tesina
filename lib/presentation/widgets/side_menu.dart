@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proyecto_tesina/config/menu/menu_items.dart';
 
-class SideMenu extends StatefulWidget {
+import '../providers/theme/theme_provider.dart';
+
+class SideMenu extends ConsumerStatefulWidget {
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
@@ -12,16 +15,19 @@ class SideMenu extends StatefulWidget {
   });
 
   @override
-  State<SideMenu> createState() => _SideMenuState();
+  SideMenuState createState() => SideMenuState();
 }
 
-class _SideMenuState extends State<SideMenu> {
+class SideMenuState extends ConsumerState<SideMenu> {
 
   int navDrawerIndex = 0;
 
 
   @override
   Widget build(BuildContext context) {
+
+
+    final bool isDarkmode = ref.watch(themeNotifierProvider).isDarkmode;
 
     final hasNotch = MediaQuery.of(context).viewPadding.top > 35;
 
@@ -62,7 +68,21 @@ class _SideMenuState extends State<SideMenu> {
             label: Text(item.title)
           ),
         ),
-        
+        const Padding(
+          padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+          child: Divider(),
+        ),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
+          child:  Text('Preferencias'),
+        ),
+        IconButton(
+          iconSize: 40,
+            onPressed: () {
+              ref.read(isDarkModeProvider.notifier).isDark();
+            }, 
+            icon: Icon( isDarkmode ?  Icons.dark_mode_outlined : Icons.light_mode_outlined )         
+          )        
         
       ]
     );

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:proyecto_tesina/infraestructure/models/partidos.dart';
+import 'package:proyecto_tesina/presentation/providers/graficos/grafico_provider.dart';
 import 'package:proyecto_tesina/presentation/widgets/side_menu.dart';
 
 import '../../../config/menu/menu_items.dart';
@@ -18,14 +19,13 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class HomeScreenState extends ConsumerState<HomeScreen> {
   List<Partido> bands = [
-    Partido(id: 1, name: 'FMLN', votes: 2),
-    Partido(id: 2, name: 'Nuevas Ideas', votes: 7),
-    Partido(id: 3, name: 'Arena', votes: 3),
-    Partido(id: 4, name: 'VAMOS', votes: 1),
   ];
 
   @override
   Widget build(BuildContext context) {
+
+    bands = ref.watch(datosProvider);
+
     final scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: scaffoldKey,
@@ -75,26 +75,32 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
         const SizedBox(
           height: 80,
         ),
-        _showGraph()
+        _showGraph(bands)
       ]),
       drawer: SideMenu(scaffoldKey: scaffoldKey),
     );
   }
 
-  Widget _showGraph() {
+  Widget _showGraph(List datos) {
     Map<String, double> dataMap = {};
 
-    bands.forEach((band) {
+    //final datos = ref.watch(datosProvider);
+
+    if(datos.isEmpty) return const CircularProgressIndicator();
+    
+
+    datos.forEach((band) {
       dataMap.putIfAbsent(band.name, () => band.votes.toDouble());
     });
 
-    //if(dataMap.isEmpty) return const CircularProgressIndicator();
 
     return Container(
-        padding: const EdgeInsets.only(top: 10),
-        width: double.infinity,
-        height: 250,
-        child: PieChart(dataMap: dataMap));
+      padding: const EdgeInsets.only(top: 10),
+      width: double.infinity,
+      height: 250,
+      child: PieChart(dataMap: dataMap, animationDuration: const Duration(milliseconds: 100),)
+    );   
+    
   }
 }
 

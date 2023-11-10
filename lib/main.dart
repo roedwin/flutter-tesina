@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proyecto_tesina/config/router/app_router.dart';
-import 'package:proyecto_tesina/config/theme/app_theme.dart';
+import 'package:proyecto_tesina/presentation/providers/theme/theme_provider.dart';
+import 'package:proyecto_tesina/presentation/providers/tutorial/mostrar_tutorial_provider.dart';
 //import 'package:proyecto_tesina/presentation/screens/screens.dart';
 
 void main() {
-  runApp(
-    const ProviderScope(
-      child: MainApp()
-    )
-  );
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends ConsumerWidget {
@@ -17,11 +14,17 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final isDarkmode = ref.watch(isDarkModeProvider);
+    final appRouter = ref.watch(appRouterProvider);
+    final tutorialStatus = ref.watch(mostrarTutorialProvider);
     return MaterialApp.router(
-        title: 'TSE',
-        routerConfig: appRouter,
-        debugShowCheckedModeBanner: false,
-        theme: Apptheme().getTheme(),
-      );
+      title: 'TSE',
+      routerConfig: appRouter,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          useMaterial3: true,
+          brightness: isDarkmode ? Brightness.dark : Brightness.light,
+          colorSchemeSeed: const Color(0xff2862f5)),
+    );
   }
 }

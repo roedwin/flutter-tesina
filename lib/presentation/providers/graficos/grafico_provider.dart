@@ -73,7 +73,6 @@ class DatosNotifier extends StateNotifier<List<Partido>> {
   void llenarDatos(){
     _socket.on('active-bands', (data) {
     //_socket.on('getSufragios', (data) {
-      print(data);
       bands = (data as List).map((band) => Partido.fromMap(band)).toList();
       state = bands;
     });
@@ -102,7 +101,6 @@ class DatosMNotifier extends StateNotifier<List<Masculino>> {
   void llenarDatos(){
     _socket.on('active-bands', (data) {
     //_socket.on('getSufragios', (data) {
-      print(data);
       bands = (data as List).map((band) => Masculino.fromMap(band)).toList();
       state = bands;
     });
@@ -130,7 +128,6 @@ class DatosFNotifier extends StateNotifier<List<Femenino>> {
   void llenarDatos(){
     _socket.on('active-bands', (data) {
     //_socket.on('getSufragios', (data) {
-      print(data);
       bands = (data as List).map((band) => Femenino.fromMap(band)).toList();
       state = bands;
     });

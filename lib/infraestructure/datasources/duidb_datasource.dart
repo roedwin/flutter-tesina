@@ -5,9 +5,11 @@ import 'package:proyecto_tesina/domain/datasources/dui_datasource.dart';
 import 'package:proyecto_tesina/domain/entities/dui.dart';
 import 'package:proyecto_tesina/infraestructure/models/dui_response.dart';
 
+
+
 class DuidbDatasource extends DuiDatasource{
   final dio = Dio(BaseOptions(
-    baseUrl: 'http://54.218.81.88/api/v1/destino-sufragio/dui/',
+    baseUrl: 'https://cloudiqinnovations.link/api/v1/destino-sufragio/dui/',
   ));
 
   Dui? datosDui;
@@ -25,11 +27,11 @@ class DuidbDatasource extends DuiDatasource{
       municipio: duiDBResponse.informacionPersonal.municipio.nombre,
       centrodevotacion: duiDBResponse.jrv.centroVotacion.nombre, 
       direccion: duiDBResponse.jrv.centroVotacion.direccion, 
-      jrv: duiDBResponse.jrv.idCentroVotacion.toString(), 
-      correlativo: duiDBResponse.jrv.codigo
+      jrv: duiDBResponse.jrv.codigo, 
+      correlativo: duiDBResponse.jrv.idJrv.toString()
     );
 
-    print(datosDui?.nombre);
+    //print(datosDui?.nombre);
 
     return datosDui;
   }

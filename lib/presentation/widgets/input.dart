@@ -34,7 +34,7 @@ class Input extends StatelessWidget {
                   ),
                   Expanded(
                     child: Align(
-                        alignment: Alignment.centerRight, child: Text(dato)),
+                        alignment: Alignment.centerRight, child: Text(dato, style: const TextStyle(color: Colors.black54),)),
                   ),
                 ],
               ),

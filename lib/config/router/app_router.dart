@@ -1,11 +1,15 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:proyecto_tesina/presentation/providers/tutorial/mostrar_tutorial_provider.dart';
 import 'package:proyecto_tesina/presentation/screens/dui/dui_info_screen.dart';
 import 'package:proyecto_tesina/presentation/screens/graficos/graficos.dart';
 import 'package:proyecto_tesina/presentation/screens/screens.dart';
 
 
-final appRouter = GoRouter(
-  initialLocation: '/tutorial',
+final appRouterProvider = Provider<GoRouter>((ref) {
+  final tutorialMostrado = ref.watch(mostrarTutorialProvider);
+  return GoRouter(
+  initialLocation: tutorialMostrado ? '/' : '/tutorial',
   routes: [
     GoRoute(
       path: '/',
@@ -32,5 +36,5 @@ final appRouter = GoRouter(
       name: DuiInfoScreen.name,
       builder: (context, state) => const DuiInfoScreen(),
     ),
-  ]
-);
+  ]);
+});
