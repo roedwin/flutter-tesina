@@ -16,7 +16,7 @@ class MenuItem {
 
 const appMenuItems = <MenuItem>[
   MenuItem(
-    title: 'Home screen', 
+    title: 'Principal', 
     subTitle: 'Home', 
     link: '/', 
     icon: Icons.home

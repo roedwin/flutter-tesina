@@ -27,7 +27,7 @@ class SideMenuState extends ConsumerState<SideMenu> {
   Widget build(BuildContext context) {
 
 
-    final bool isDarkmode = ref.watch(themeNotifierProvider).isDarkmode;
+    final isDarkmode = ref.watch(isDarkModeProvider);
 
     final hasNotch = MediaQuery.of(context).viewPadding.top > 35;
 
@@ -68,21 +68,22 @@ class SideMenuState extends ConsumerState<SideMenu> {
             label: Text(item.title)
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-          child: Divider(),
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
-          child:  Text('Preferencias'),
-        ),
-        IconButton(
-          iconSize: 40,
-            onPressed: () {
-              ref.read(isDarkModeProvider.notifier).isDark();
-            }, 
-            icon: Icon( isDarkmode ?  Icons.dark_mode_outlined : Icons.light_mode_outlined )         
-          )        
+        Padding(
+          padding: const EdgeInsets.fromLTRB(28, 5, 16, 10),
+          child: Row(
+            children: [
+              const Text("Modo Oscuro"),
+              const SizedBox(width: 10,),
+              IconButton(
+                iconSize: 30,
+                  onPressed: () {
+                    ref.read(isDarkModeProvider.notifier).isDark();
+                  }, 
+                  icon: Icon( isDarkmode ?  Icons.dark_mode : Icons.dark_mode_outlined )         
+                ),
+            ],
+          ),
+        )        
         
       ]
     );

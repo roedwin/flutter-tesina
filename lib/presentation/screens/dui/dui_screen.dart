@@ -95,7 +95,7 @@ class _DuiView extends ConsumerWidget {
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(),
-                      hintText: 'DUI (12345678-9)',
+                      hintText: '01234567-8',
                       hintStyle: TextStyle(
                         fontSize: 18.0,
                         color: Colors.grey, // Color de texto del placeholder
@@ -139,6 +139,10 @@ class _DuiView extends ConsumerWidget {
                         ),
                         onPressed: () async {
                           final verDui = DuidbDatasource();
+                          if (dui.isEmpty) {
+                            showAlertDialog(
+                                context, "Alerta", "Ingresa un numero de DUI", onOkPressed: (){});
+                          }
                           try {
                             final datos = await verDui.getData(dui);
 
