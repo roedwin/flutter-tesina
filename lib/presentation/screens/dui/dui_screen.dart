@@ -1,10 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:proyecto_tesina/domain/entities/dui.dart';
 import 'package:proyecto_tesina/infraestructure/datasources/duidb_datasource.dart';
 import 'package:proyecto_tesina/presentation/providers/dui/dui_provider.dart';
+import 'package:proyecto_tesina/presentation/providers/http/http_status_provider.dart';
 
 import '../../../config/menu/menu_items.dart';
 
@@ -117,7 +119,6 @@ class _DuiView extends ConsumerWidget {
                         .center, // Alinea los elementos al centro horizontalmente
                     children: [
                       ElevatedButton(
-                        
                         onPressed: () {
                           context.pop();
                         },
@@ -125,7 +126,10 @@ class _DuiView extends ConsumerWidget {
                           backgroundColor: MaterialStateProperty.all<Color>(Colors
                               .grey), // Cambia "Colors.blue" al color que desees
                         ),
-                        child: const Text('CANCELAR',style: TextStyle(color: Colors.white),),
+                        child: const Text(
+                          'CANCELAR',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                       const SizedBox(width: 16.0), // Espacio entre los botones
                       ElevatedButton(
@@ -135,14 +139,40 @@ class _DuiView extends ConsumerWidget {
                         ),
                         onPressed: () async {
                           final verDui = DuidbDatasource();
-                          final datos = await verDui.getData(dui);
+                          try {
+                            final datos = await verDui.getData(dui);
 
-                          ref
-                              .read(duiInfoProvider.notifier)
-                              .update((state) => state = datos);
+                            ref
+                                .read(duiInfoProvider.notifier)
+                                .update((state) => state = datos);
 
-                          final menuItem = appMenuItems[4].link;
-                          context.pushReplacement(menuItem);
+                            final isGood = ref.watch(httpStatusProvider);
+
+                            if (!isGood) {
+                              showAlertDialog(
+                                context,
+                                "Alerta",
+                                "Dui no encontrado",
+                                onOkPressed: () {
+                                  // Acciones a realizar cuando se presiona OK
+                                },
+                              );
+
+                              return;
+                            }
+
+                            final menuItem = appMenuItems[4].link;
+                            context.pushReplacement(menuItem);
+                          } catch (e) {
+                            showAlertDialog(
+                              context,
+                              "Alerta de servidor",
+                              "Servidor caido",
+                              onOkPressed: () {
+                                // Acciones a realizar cuando se presiona OK
+                              },
+                            );
+                          }
                         },
                         child: const Text(
                           'CONSULTAR',
@@ -184,4 +214,34 @@ class DuiInputFormatter extends TextInputFormatter {
       selection: TextSelection.collapsed(offset: newText.length),
     );
   }
+}
+
+showAlertDialog(BuildContext context, String title, String content,
+    {VoidCallback? onOkPressed}) {
+  // set up the button
+  Widget okButton = TextButton(
+    onPressed: () {
+      final menuItem = appMenuItems[0].link;
+      context.pushReplacement(menuItem);
+    },
+    child: const Text(
+        "OK"), // Si onOkPressed es nulo, asigna una función vacía como predeterminada
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text(title),
+    content: Text(content),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

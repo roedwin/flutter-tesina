@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proyecto_tesina/config/theme/app_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final themeNotifierProvider = StateNotifierProvider<ThemeNotifier, Apptheme>(
   (ref) {
@@ -26,7 +27,21 @@ final isDarkModeProvider = StateNotifierProvider<IsDark,bool>((ref) {
 class IsDark extends StateNotifier<bool>{
   IsDark(): super(false);
 
-  void isDark(){
+  void isDark() async{   
     state = !state;
+    checkDarkModeStatus();
   }
+  void checkDarkModeStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.getBool('isDarkMode') ?? false;
+    prefs.setBool('isDarkMode', state);
+  }
+
+  void initialModeStatus() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool statusMode = prefs.getBool('isDarkMode') ?? false;
+    state = statusMode;
+
+  }
+    
 }
