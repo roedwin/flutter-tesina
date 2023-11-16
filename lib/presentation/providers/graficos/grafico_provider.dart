@@ -1,6 +1,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proyecto_tesina/infraestructure/models/generos.dart';
+import 'package:proyecto_tesina/infraestructure/models/lugares.dart';
 import 'package:proyecto_tesina/infraestructure/models/partidos.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -135,3 +136,35 @@ class DatosFNotifier extends StateNotifier<List<Femenino>> {
 
 }
 
+//Votos Por departamento
+final departamentoProvider = StateNotifierProvider.autoDispose<DatosDNotifier,List<Departamento>>((ref) {
+  String departamento = ref.watch(depProvider);
+  return DatosDNotifier(departamento: departamento);
+});
+
+class DatosDNotifier extends StateNotifier<List<Departamento>> {
+  //final IO.Socket _socket = IO.io('http://10.0.2.2:3000', {
+  final IO.Socket _socket = IO.io('http://34.224.60.108:3000/', {
+    'transports': ['websocket'],
+    'autoConnect': true,
+  });
+  List<Departamento> bands = [];
+  final String departamento;
+  DatosDNotifier({required this.departamento}): super([]){
+    llenarDatos(departamento);
+  }
+  
+
+  void llenarDatos(departamento){
+    _socket.on('active-bands', (data) {
+    //_socket.on('getSufragios', (data) {
+      bands = (data as List).map((band) => Departamento.fromMap(band, departamento)).toList();
+      state = bands;
+    });
+  }
+
+}
+
+final depProvider = StateProvider<String>((ref) {
+  return "SAN MIGUEL";
+});

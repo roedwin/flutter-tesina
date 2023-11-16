@@ -40,3 +40,24 @@ class Femenino {
   }
 
 }
+
+class Generos {
+  int id;
+  String name;
+  int votes;
+
+  Generos({
+    required this.id,
+    required this.name,
+    this.votes = 0
+  });
+
+  factory Generos.fromMap(Map<String, dynamic> obj) {
+    return Generos(
+      id: obj.containsKey('id') ? obj['id'] : 'no-id', 
+      name: obj.containsKey('name') ?  obj['name']: 'no-name', 
+      votes: obj.containsKey('votes') ?  obj['votes']: 'no-votes'
+    );
+  }
+
+}

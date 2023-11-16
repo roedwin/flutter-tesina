@@ -1,4 +1,4 @@
-package com.example.proyecto_tesina
+package com.edwinrivera.consultapp
 
 import io.flutter.embedding.android.FlutterActivity
 

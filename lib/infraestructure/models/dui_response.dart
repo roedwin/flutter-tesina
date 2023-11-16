@@ -56,8 +56,8 @@
 class DuiDbResponse {
     final int idDetalleSufragio;
     final int idPersonaNatural;
-    final String uuidInfo;
-    final String ledgerId;
+    final String? uuidInfo;
+    final String? ledgerId;
     final int idJrv;
     final dynamic asistioEn;
     final String estadoVoto;

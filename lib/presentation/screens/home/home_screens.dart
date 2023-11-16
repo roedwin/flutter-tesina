@@ -33,51 +33,54 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
         
       ),
       body: SingleChildScrollView(
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          const Align(
-            alignment:
-                Alignment.topCenter, // Alinea la imagen en la parte superior
-            child: FractionallySizedBox(
-              widthFactor: 1.0, // Ocupa todo el ancho disponible
-              child: Image(
-                image: AssetImage('assets/images/Tse_logo.png'),
-                width: 250,
-                height: 250,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            const Align(
+              alignment:
+                  Alignment.topCenter, // Alinea la imagen en la parte superior
+              child: FractionallySizedBox(
+                widthFactor: 1.0, // Ocupa todo el ancho disponible
+                child: Image(
+                  image: AssetImage('assets/images/Tse_logo.png'),
+                  width: 250,
+                  height: 250,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomButton(
-                screen: 1,
-                text: "Verificar DUI",
-                icon: Icon(
-                  Icons.co_present_outlined,
-                  color: Color(0xff2862f5),
-                  size: 50,
+            const SizedBox(
+              height: 40,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  screen: 1,
+                  text: "Verificar DUI",
+                  icon: Icon(
+                    Icons.co_present_outlined,
+                    color: Color(0xff2862f5),
+                    size: 50,
+                  ),
                 ),
-              ),
-              SizedBox(width: 16),
-              CustomButton(
-                screen: 2,
-                text: "Estadisticas",
-                icon: Icon(
-                  Icons.pie_chart,
-                  color: Color(0xff2862f5),
-                  size: 50,
+                SizedBox(width: 16),
+                CustomButton(
+                  screen: 2,
+                  text: "Estadisticas",
+                  icon: Icon(
+                    Icons.pie_chart,
+                    color: Color(0xff2862f5),
+                    size: 50,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 80,
-          ),
-          _showGraph(bands)
-        ]),
+              ],
+            ),
+            const SizedBox(
+              height: 80,
+            ),
+            _showGraph(bands)
+          ]),
+        ),
       ),
       drawer: SideMenu(scaffoldKey: scaffoldKey),
     );

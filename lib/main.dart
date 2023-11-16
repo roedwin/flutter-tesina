@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proyecto_tesina/config/router/app_router.dart';
 import 'package:proyecto_tesina/presentation/providers/theme/theme_provider.dart';
-import 'package:proyecto_tesina/presentation/providers/tutorial/mostrar_tutorial_provider.dart';
 //import 'package:proyecto_tesina/presentation/screens/screens.dart';
 
 void main() {
@@ -16,7 +15,6 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final isDarkmode = ref.watch(isDarkModeProvider);
     final appRouter = ref.watch(appRouterProvider);
-    final tutorialStatus = ref.watch(mostrarTutorialProvider);
     return MaterialApp.router(
       title: 'TSE',
       routerConfig: appRouter,

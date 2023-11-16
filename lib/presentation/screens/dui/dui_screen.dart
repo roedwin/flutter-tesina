@@ -35,7 +35,7 @@ class _DuiView extends ConsumerWidget {
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -98,7 +98,7 @@ class _DuiView extends ConsumerWidget {
                       hintText: '01234567-8',
                       hintStyle: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.grey, // Color de texto del placeholder
+                        color: Colors.blueGrey, // Color de texto del placeholder
                       ),
                       contentPadding: EdgeInsets.symmetric(
                           vertical: 12.0, horizontal: 16.0),
@@ -143,40 +143,29 @@ class _DuiView extends ConsumerWidget {
                             showAlertDialog(
                                 context, "Alerta", "Ingresa un numero de DUI", onOkPressed: (){});
                           }
-                          try {
-                            final datos = await verDui.getData(dui);
+                          final datos = await verDui.getData(dui);
 
-                            ref
-                                .read(duiInfoProvider.notifier)
-                                .update((state) => state = datos);
+                          ref
+                              .read(duiInfoProvider.notifier)
+                              .update((state) => state = datos);
 
-                            final isGood = ref.watch(httpStatusProvider);
 
-                            if (!isGood) {
-                              showAlertDialog(
-                                context,
-                                "Alerta",
-                                "Dui no encontrado",
-                                onOkPressed: () {
-                                  // Acciones a realizar cuando se presiona OK
-                                },
-                              );
-
-                              return;
-                            }
-
-                            final menuItem = appMenuItems[4].link;
-                            context.pushReplacement(menuItem);
-                          } catch (e) {
+                          if (datos == null) {
                             showAlertDialog(
                               context,
-                              "Alerta de servidor",
-                              "Servidor caido",
+                              "Alerta",
+                              "Dui no encontrado",
                               onOkPressed: () {
-                                // Acciones a realizar cuando se presiona OK
+                                final menuItem = appMenuItems[0].link;
+                                context.pushReplacement(menuItem);
                               },
                             );
+                            return;
                           }
+
+                          final menuItem = appMenuItems[4].link;
+                          context.pushReplacement(menuItem);
+                          
                         },
                         child: const Text(
                           'CONSULTAR',

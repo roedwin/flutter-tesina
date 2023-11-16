@@ -16,33 +16,31 @@ class DuidbDatasource extends DuiDatasource {
 
   @override
   Future getData(String dui) async {
-    try {
+    try {      
       final response = await dio.get(dui);
 
       if (response.statusCode == 200) {
         final duiDBResponse = DuiDbResponse.fromJson(response.data);
         datosDui = Dui(
-            id: duiDBResponse.idPersonaNatural.toString(),
-            dui: duiDBResponse.informacionPersonal.dui,
-            nombre: duiDBResponse.informacionPersonal.nombres +
-                duiDBResponse.informacionPersonal.apellidos,
-            departamento: duiDBResponse
-                .informacionPersonal.municipio.departamentos.nombre,
-            municipio: duiDBResponse.informacionPersonal.municipio.nombre,
-            centrodevotacion: duiDBResponse.jrv.centroVotacion.nombre,
-            direccion: duiDBResponse.jrv.centroVotacion.direccion,
-            jrv: duiDBResponse.jrv.codigo,
-            correlativo: duiDBResponse.jrv.idJrv.toString());
+          id: duiDBResponse.idPersonaNatural.toString(),
+          dui: duiDBResponse.informacionPersonal.dui,
+          nombre: duiDBResponse.informacionPersonal.nombres +
+              duiDBResponse.informacionPersonal.apellidos,
+          departamento: duiDBResponse
+              .informacionPersonal.municipio.departamentos.nombre,
+          municipio: duiDBResponse.informacionPersonal.municipio.nombre,
+          centrodevotacion: duiDBResponse.jrv.centroVotacion.nombre,
+          direccion: duiDBResponse.jrv.centroVotacion.direccion,
+          jrv: duiDBResponse.jrv.codigo,
+          correlativo: duiDBResponse.jrv.idJrv.toString()
+        );
 
         //print(datosDui?.nombre);
 
         return datosDui;
       }
-      if (response.statusCode == 404) {
-        isGood = false;
-      } else {}
-    } catch (e) {
-      throw Exception("Error en la solicitud HTTP: $e");
+    } catch (e) {      
+      isGood = false;
     }
   }
 }

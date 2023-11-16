@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proyecto_tesina/presentation/providers/theme/theme_provider.dart';
 import 'package:proyecto_tesina/presentation/providers/tutorial/mostrar_tutorial_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SlideInfo {
   final String title;

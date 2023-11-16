@@ -120,7 +120,7 @@ class BarChartSampleState extends ConsumerState<BarChartSampleM> {
       );
 
   LinearGradient get _barsGradient => const LinearGradient(
-      colors: [Colors.blueAccent, Colors.blueGrey],
+      colors: [Colors.blueAccent, Colors.blueAccent],
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter);
 
