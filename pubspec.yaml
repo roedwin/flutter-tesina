@@ -40,6 +40,11 @@ flutter_native_splash:
   color: "#282928"
   background_image: "assets/icon/app-icon-1.png"
 
+cached_video_player:
+    git:
+      url: https://github.com/vikram25897/flutter_cached_video_player
+      ref: feature/gradle_version_bump
+
 flutter:
   assets:
     - assets/images/
