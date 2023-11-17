@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 import 'package:proyecto_tesina/domain/datasources/dui_datasource.dart';
 import 'package:proyecto_tesina/domain/entities/dui.dart';
 import 'package:proyecto_tesina/infraestructure/models/dui_response.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class DuidbDatasource extends DuiDatasource {
   final dio = Dio(BaseOptions(

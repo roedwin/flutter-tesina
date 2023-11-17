@@ -69,8 +69,6 @@ class HomePageState extends ConsumerState<Graficos> {
       },
     ];
 
-    final totalGenero = totalFVotes + totalMVotes;
-
     final datosGeneros = (objGeneros).map((band) => Generos.fromMap(band)).toList();
 
     final titleStyle = Theme.of(context).textTheme.titleLarge;

@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:proyecto_tesina/infraestructure/datasources/duidb_datasource.dart';
 import 'package:proyecto_tesina/presentation/providers/dui/dui_provider.dart';
-import 'package:proyecto_tesina/presentation/providers/http/http_status_provider.dart';
 
 import '../../../config/menu/menu_items.dart';
 

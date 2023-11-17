@@ -52,6 +52,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               height: 40,
             ),
             const Row(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
@@ -60,23 +61,23 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                   icon: Icon(
                     Icons.co_present_outlined,
                     color: Color(0xff2862f5),
-                    size: 50,
+                    size: 40,
                   ),
                 ),
-                SizedBox(width: 16),
+                SizedBox(width: 10),
                 CustomButton(
                   screen: 2,
                   text: "Estadisticas",
                   icon: Icon(
                     Icons.pie_chart,
                     color: Color(0xff2862f5),
-                    size: 50,
+                    size: 40,
                   ),
                 ),
               ],
             ),
             const SizedBox(
-              height: 80,
+              height: 70,
             ),
             _showGraph(bands)
           ]),
@@ -131,7 +132,7 @@ class CustomButton extends StatelessWidget {
             context.push(menuItem.link);
           },
           child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Column(
                 children: [
                   Text(
