@@ -90,10 +90,7 @@ class HomePageState extends ConsumerState<Graficos> {
               ],
             ),
             Center(child: showGraph(bands)),
-
-            Text('Voto por departamento', style: titleStyle,),
-            const SizedBox(child: DropdownButtonExample()),
-
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -109,6 +106,9 @@ class HomePageState extends ConsumerState<Graficos> {
             Text('Voto Femenino', style: titleStyle,),
             // _showGraph(bandsF),
             const BarChartSample(),
+
+            Text('Voto por departamento', style: titleStyle,),
+            const SizedBox(child: DropdownButtonExample()),
 
 
             //_showGraph(bandsDep),

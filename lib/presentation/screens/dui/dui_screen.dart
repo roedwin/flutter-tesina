@@ -87,6 +87,7 @@ class _DuiView extends ConsumerWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextField(
+                    style: const TextStyle(color: Colors.blueAccent),
                     controller: _duiController,
                     keyboardType: TextInputType.number,
                     inputFormatters: [DuiInputFormatter()],

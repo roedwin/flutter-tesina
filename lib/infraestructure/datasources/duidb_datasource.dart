@@ -22,8 +22,7 @@ class DuidbDatasource extends DuiDatasource {
         datosDui = Dui(
           id: duiDBResponse.idPersonaNatural.toString(),
           dui: duiDBResponse.informacionPersonal.dui,
-          nombre: duiDBResponse.informacionPersonal.nombres +
-              duiDBResponse.informacionPersonal.apellidos,
+          nombre: '${duiDBResponse.informacionPersonal.nombres} ${duiDBResponse.informacionPersonal.apellidos}',
           departamento: duiDBResponse
               .informacionPersonal.municipio.departamentos.nombre,
           municipio: duiDBResponse.informacionPersonal.municipio.nombre,
